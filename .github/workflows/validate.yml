@@ -19,6 +19,7 @@ jobs:
           cache: 'gradle'
 
       - run: set -eu
+      - run: chmod +x gradlew
 
       - name: Build with Gradle
         run: ./gradlew clean build ktlintFormat
