@@ -22,7 +22,7 @@ To start and test service you should install `ffmpeg` first.
 
 ___
 
-### Проверка окружения
+### Check environment
 For test installation you can use next command: `ffmpeg -version`. Output should be similar to listing below:
 ```
 > ffmpeg -version
