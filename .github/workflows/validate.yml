@@ -1,13 +1,10 @@
 name: Validate
 
-on: pull_request
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-18.04
-
-    env:
-      PULL_REQUEST_KEY: ${{ github.event.pull_request.number }}
 
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +21,7 @@ jobs:
       - run: set -eu
 
       - name: Build with Gradle
-        run: ./gradlew clean build ktlintFormat -Dsonar.pullrequest.key=$PULL_REQUEST_KEY
+        run: ./gradlew clean build ktlintFormat
 
       - name: Publish Test Report
         id: test-report
@@ -32,12 +29,3 @@ jobs:
         uses: scacap/action-surefire-report@v1
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
-
-      - name: Add coverage to PR
-        id: jacoco
-        uses: madrapps/jacoco-report@v1.2
-        with:
-          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
-          token: ${{ secrets.COMMENT_GITHUB_TOKEN }}
-          min-coverage-overall: 80
-          min-coverage-changed-files: 80
