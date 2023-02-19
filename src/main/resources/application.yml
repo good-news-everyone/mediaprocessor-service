@@ -1,0 +1,39 @@
+logging:
+  level:
+    root: info
+    com.hometech.mediaprocessor: DEBUG
+    com.github.kokorin.jaffree.process.Executor: ERROR
+    com.github.kokorin.jaffree.process.LoggingStdReader: ERROR
+    com.github.kokorin.jaffree.ffmpeg: ERROR
+
+spring:
+  application:
+    name: mediaprocessor-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:postgres]}
+    password: ${POSTGRES_PASSWORD:root}
+    username: ${POSTGRES_USERNAME:postgres}
+    hikari:
+      maximum-pool-size: ${MAXIMUM_POOLSIZE:5}
+  exposed:
+    show-sql: ${LOG_SQL_QUERIES:false}
+
+app:
+  base-url: ${BASE_URL:http://localhost:8080}
+  temp-files-path: ${TEMP_FILE_PATH:${user.dir}/tmp}
+  aws:
+    region: ${AWS_REGION:eu-central-1}
+    access-key-id: ${AWS_ACCESS_KEY_ID:invalid}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY:invalid}
+    bucket: ${AWS_PUBLIC_BUCKET_NAME:files-bucket}
+    cloudfront: https://d39n744uhkvepr.cloudfront.net
+  callback:
+    url: ${CALLBACK_URL:http://localhost:8080}
+
+springdoc:
+  default-produces-media-type: application/json
+
+sentry:
+  dsn: ${SENTRY_DSN:}
+  traces-sample-rate: 1.0
+  max-request-body-size: always
