@@ -23,10 +23,3 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew clean build ktlintFormat
-
-      - name: Publish Test Report
-        id: test-report
-        if: ${{ always() }}
-        uses: scacap/action-surefire-report@v1
-        with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
